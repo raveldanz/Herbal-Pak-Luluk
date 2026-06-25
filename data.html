@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Pesanan - Admin Herbal Pak Luluk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
+</head>
+<body class="admin-page">
+
+<div class="admin-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="brand">
+      <div class="brand-icon"><i class="fa fa-leaf"></i></div>
+      <div>
+        <h4>Herbal Pak Luluk</h4>
+        <small>Admin Panel</small>
+      </div>
+    </div>
+    <nav class="admin-nav">
+      <div class="nav-section-title">Menu Utama</div>
+      <a href="admin.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+      <a href="data.html" class="active"><i class="fa fa-table"></i><span>Data Pesanan</span></a>
+      <a href="produk-admin.html"><i class="fa fa-cube"></i><span>Kelola Produk</span></a>
+
+      <div class="nav-section-title">Halaman Publik</div>
+      <a href="index.html"><i class="fa fa-home"></i><span>Beranda</span></a>
+      <a href="produk.html"><i class="fa fa-shopping-bag"></i><span>Produk</span></a>
+      <a href="pesan.html"><i class="fa fa-pencil"></i><span>Form Pesan</span></a>
+      <a href="tentang.html"><i class="fa fa-info-circle"></i><span>Tentang</span></a>
+      <a href="galeri.html"><i class="fa fa-picture-o"></i><span>Galeri</span></a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- TOPBAR -->
+    <div class="admin-topbar">
+      <div class="page-title">
+        <h5>Data Pesanan</h5>
+        <small>Kelola semua pesanan pelanggan</small>
+      </div>
+      <div class="topbar-actions">
+        <a href="#" onclick="bukaModalTambah()"><i class="fa fa-plus"></i> Tambah Pesanan</a>
+        <a href="index.html"><i class="fa fa-external-link"></i> Lihat Website</a>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+
+      <!-- ALERT -->
+      <div class="admin-alert success" id="alertBox" role="alert"></div>
+
+      <div class="admin-panel">
+        <div class="panel-header">
+          <h5><i class="fa fa-list" style="color:var(--admin-accent);margin-right:8px"></i>Daftar Pesanan Pelanggan</h5>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <div class="search-input-wrapper">
+              <i class="fa fa-search"></i>
+              <input type="text" class="admin-form-control" id="searchInput" placeholder="Cari nama atau produk..." oninput="filterTable()" style="width:220px;">
+            </div>
+            <button class="btn-admin-primary" onclick="bukaModalTambah()"><i class="fa fa-plus"></i> Tambah</button>
+          </div>
+        </div>
+        <div class="panel-body" style="padding:0;overflow-x:auto;">
+          <table class="admin-table" id="tabelUtama">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Pelanggan</th>
+                <th>No. HP</th>
+                <th>Produk</th>
+                <th>Jumlah</th>
+                <th>Alamat</th>
+                <th>Tanggal</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelBody">
+              <!-- filled by JS -->
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:14px 22px;border-top:1px solid var(--admin-border);font-size:12px;color:var(--admin-muted);">
+          Total: <span id="totalData">0</span> pesanan
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+
+    <div class="admin-footer">&copy; 2025 Herbal Pak Luluk &mdash; Admin Panel</div>
+
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrapper -->
+
+<!-- MODAL TAMBAH / EDIT -->
+<div class="admin-modal-overlay" id="modalOverlay">
+  <div class="admin-modal">
+    <h5 id="modalTitle">Tambah Pesanan</h5>
+    <input type="hidden" id="editIndex" value="-1">
+
+    <div class="form-group-admin">
+      <label>Nama Pelanggan</label>
+      <input type="text" class="admin-form-control" id="mNama" placeholder="Contoh: Budi Santoso">
+    </div>
+    <div class="form-group-admin">
+      <label>Nomor HP</label>
+      <input type="text" class="admin-form-control" id="mHp" placeholder="Contoh: 0812xxxxxxxx">
+    </div>
+    <div class="form-group-admin">
+      <label>Alamat</label>
+      <input type="text" class="admin-form-control" id="mAlamat" placeholder="Kota / Kecamatan">
+    </div>
+    <div class="form-group-admin">
+      <label>Produk</label>
+      <select class="admin-form-control" id="mProduk">
+        <option value="">-- Pilih Produk --</option>
+        <option>Balsem Terapi Panas 40gr</option>
+        <option>Balsem Terapi Hangat 20gr</option>
+        <option>Balsem Terapi Panas 20gr</option>
+        <option>Balsem Terapi Hangat 40gr</option>
+        <option>Minyak Terapi</option>
+        <option>Minyak Kayu Putih</option>
+        <option>Minyak Angin Aroma</option>
+        <option>Minyak Angin</option>
+        <option>Kapsul Herbal</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group-admin">
+          <label>Jumlah</label>
+          <input type="number" class="admin-form-control" id="mJumlah" placeholder="1" min="1">
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group-admin">
+          <label>Tanggal Pesan</label>
+          <input type="date" class="admin-form-control" id="mTanggal">
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer-btns">
+      <button class="btn-admin-cancel" onclick="tutupModal()">Batal</button>
+      <button class="btn-admin-primary" onclick="simpanData()"><i class="fa fa-save"></i> Simpan</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KONFIRMASI HAPUS -->
+<div class="admin-modal-overlay" id="modalHapus">
+  <div class="admin-modal" style="width:380px;">
+    <h5>Konfirmasi Hapus</h5>
+    <p style="color:var(--admin-muted);font-size:14px;">Yakin ingin menghapus data pesanan ini? Tindakan ini tidak dapat dibatalkan.</p>
+    <input type="hidden" id="hapusIndex">
+    <div class="modal-footer-btns">
+      <button class="btn-admin-cancel" onclick="tutupModalHapus()">Batal</button>
+      <button class="btn-admin-primary" style="background:var(--admin-accent);" onclick="konfirmasiHapus()"><i class="fa fa-trash"></i> Hapus</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // DATA DUMMY (tidak bisa dihapus)
+  const dataDummy = [
+    { nama:'Budi Santoso', hp:'081234567890', alamat:'Surabaya', produk:'Balsem Herbal Panas 40gr', jumlah:'2', tanggal:'2025-01-10', isDummy:true },
+    { nama:'Siti Aminah', hp:'082345678901', alamat:'Sidoarjo', produk:'Balsem Hangat 20gr', jumlah:'1', tanggal:'2025-01-11', isDummy:true },
+    { nama:'Ahmad Fauzi', hp:'083456789012', alamat:'Gresik', produk:'Kapsul Herbal', jumlah:'3', tanggal:'2025-01-12', isDummy:true },
+    { nama:'Dewi Lestari', hp:'084567890123', alamat:'Mojokerto', produk:'Minyak Terapi', jumlah:'1', tanggal:'2025-01-13', isDummy:true }
+  ];
+
+  function getDynamicData() {
+    return JSON.parse(localStorage.getItem('pesanan')) || [];
+  }
+
+  function getAllData() {
+    return [...dataDummy, ...getDynamicData()];
+  }
+
+  function renderTable(data) {
+    const tbody = document.getElementById('tabelBody');
+    const all = data || getAllData();
+    document.getElementById('totalData').textContent = all.length;
+
+    if (all.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--admin-muted);padding:40px;">Belum ada data pesanan</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = all.map((item, i) => {
+      const dynIndex = i - dataDummy.length;
+      const isD = item.isDummy;
+      return `
+        <tr>
+          <td>${i + 1}</td>
+          <td><strong>${item.nama}</strong></td>
+          <td>${item.hp || '-'}</td>
+          <td>${item.produk}</td>
+          <td><span style="background:rgba(233,69,96,0.15);color:var(--admin-accent);padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;">${item.jumlah}</span></td>
+          <td>${item.alamat}</td>
+          <td>${item.tanggal || '-'}</td>
+          <td>
+            ${isD
+              ? `<span style="font-size:11px;color:var(--admin-muted);background:var(--admin-border);padding:4px 10px;border-radius:6px;">Data Awal</span>`
+              : `<button class="btn-admin-sm btn-edit" onclick="bukaModalEdit(${dynIndex})"><i class="fa fa-pencil"></i> Edit</button>
+                 <button class="btn-admin-sm btn-hapus" onclick="bukaModalHapus(${dynIndex})" style="margin-left:5px;"><i class="fa fa-trash"></i></button>`
+            }
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function filterTable() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const filtered = getAllData().filter(d =>
+      d.nama.toLowerCase().includes(q) ||
+      d.produk.toLowerCase().includes(q) ||
+      (d.alamat||'').toLowerCase().includes(q)
+    );
+    renderTable(filtered);
+  }
+
+  // MODAL TAMBAH
+  function bukaModalTambah() {
+    document.getElementById('modalTitle').textContent = 'Tambah Pesanan';
+    document.getElementById('editIndex').value = -1;
+    ['mNama','mHp','mAlamat','mJumlah'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('mProduk').value = '';
+    document.getElementById('mTanggal').value = new Date().toISOString().split('T')[0];
+    document.getElementById('modalOverlay').classList.add('show');
+  }
+
+  // MODAL EDIT
+  function bukaModalEdit(idx) {
+    const data = getDynamicData();
+    const item = data[idx];
+    document.getElementById('modalTitle').textContent = 'Edit Pesanan';
+    document.getElementById('editIndex').value = idx;
+    document.getElementById('mNama').value = item.nama;
+    document.getElementById('mHp').value = item.hp || '';
+    document.getElementById('mAlamat').value = item.alamat;
+    document.getElementById('mProduk').value = item.produk;
+    document.getElementById('mJumlah').value = item.jumlah;
+    document.getElementById('mTanggal').value = item.tanggal || '';
+    document.getElementById('modalOverlay').classList.add('show');
+  }
+
+  function tutupModal() {
+    document.getElementById('modalOverlay').classList.remove('show');
+  }
+
+  function simpanData() {
+    const nama = document.getElementById('mNama').value.trim();
+    const hp = document.getElementById('mHp').value.trim();
+    const alamat = document.getElementById('mAlamat').value.trim();
+    const produk = document.getElementById('mProduk').value;
+    const jumlah = document.getElementById('mJumlah').value;
+    const tanggal = document.getElementById('mTanggal').value;
+    const editIdx = parseInt(document.getElementById('editIndex').value);
+
+    if (!nama || !hp || !alamat || !produk || !jumlah) {
+      alert('Harap isi semua field!');
+      return;
+    }
+
+    const data = getDynamicData();
+    const entry = { nama, hp, alamat, produk, jumlah, tanggal };
+
+    if (editIdx >= 0) {
+      data[editIdx] = entry;
+      tampilAlert('Data berhasil diperbarui!');
+    } else {
+      data.push(entry);
+      tampilAlert('Pesanan berhasil ditambahkan!');
+    }
+
+    localStorage.setItem('pesanan', JSON.stringify(data));
+    tutupModal();
+    renderTable();
+  }
+
+  // HAPUS
+  function bukaModalHapus(idx) {
+    document.getElementById('hapusIndex').value = idx;
+    document.getElementById('modalHapus').classList.add('show');
+  }
+
+  function tutupModalHapus() {
+    document.getElementById('modalHapus').classList.remove('show');
+  }
+
+  function konfirmasiHapus() {
+    const idx = parseInt(document.getElementById('hapusIndex').value);
+    const data = getDynamicData();
+    data.splice(idx, 1);
+    localStorage.setItem('pesanan', JSON.stringify(data));
+    tutupModalHapus();
+    tampilAlert('Data berhasil dihapus.');
+    renderTable();
+  }
+
+  function tampilAlert(msg) {
+    const el = document.getElementById('alertBox');
+    el.textContent = '✓ ' + msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 3000);
+  }
+
+  // Tutup modal klik luar
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) tutupModal();
+  });
+  document.getElementById('modalHapus').addEventListener('click', function(e) {
+    if (e.target === this) tutupModalHapus();
+  });
+
+  // INIT
+  renderTable();
+</script>
+
+</body>
+</html>

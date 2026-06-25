@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelola Produk - Admin Herbal Pak Luluk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
+</head>
+<body class="admin-page">
+<div class="admin-wrapper">
+  <aside class="admin-sidebar">
+    <div class="brand">
+      <div class="brand-icon"><i class="fa fa-leaf"></i></div>
+      <div><h4>Herbal Pak Luluk</h4><small>Admin Panel</small></div>
+    </div>
+    <nav class="admin-nav">
+      <div class="nav-section-title">Menu Utama</div>
+      <a href="admin.html"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+      <a href="data.html"><i class="fa fa-table"></i><span>Data Pesanan</span></a>
+      <a href="produk-admin.html" class="active"><i class="fa fa-cube"></i><span>Kelola Produk</span></a>
+      <div class="nav-section-title">Halaman Publik</div>
+      <a href="index.html"><i class="fa fa-home"></i><span>Beranda</span></a>
+      <a href="produk.html"><i class="fa fa-shopping-bag"></i><span>Produk</span></a>
+      <a href="pesan.html"><i class="fa fa-pencil"></i><span>Form Pesan</span></a>
+      <a href="tentang.html"><i class="fa fa-info-circle"></i><span>Tentang</span></a>
+      <a href="galeri.html"><i class="fa fa-picture-o"></i><span>Galeri</span></a>
+    </nav>
+  </aside>
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="page-title">
+        <h5>Kelola Produk</h5>
+        <small>Daftar produk Herbal Pak Luluk</small>
+      </div>
+      <div class="topbar-actions">
+        <a href="index.html"><i class="fa fa-external-link"></i> Lihat Website</a>
+      </div>
+    </div>
+    <div class="admin-content">
+      <div class="admin-panel">
+        <div class="panel-header">
+          <h5><i class="fa fa-cube" style="color:var(--admin-accent);margin-right:8px"></i>Daftar Produk</h5>
+        </div>
+        <div class="panel-body" style="padding:0;overflow-x:auto;">
+          <table class="admin-table">
+            <thead>
+              <tr><th>No</th><th>Nama Produk</th><th>Kategori</th><th>Harga</th><th>Keterangan</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Balsem Terapi Panas 40gr</td><td><span class="badge-status baru">Balsem</span></td><td>Rp 35.000</td><td>Meredakan pegal & nyeri otot</td></tr>
+              <tr><td>2</td><td>Balsem Terapi Hangat 20gr</td><td><span class="badge-status baru">Balsem</span></td><td>Rp 20.000</td><td>Sensasi hangat lembut sehari-hari</td></tr>
+              <tr><td>3</td><td>Balsem Terapi Panas 20gr</td><td><span class="badge-status baru">Balsem</span></td><td>Rp 20.000</td><td>Ukuran kecil praktis dibawa</td></tr>
+              <tr><td>4</td><td>Balsem Terapi Hangat 40gr</td><td><span class="badge-status baru">Balsem</span></td><td>Rp 35.000</td><td>Meredakan pegal ringan & nyeri sendi</td></tr>
+              <tr><td>5</td><td>Minyak Terapi</td><td><span class="badge-status proses">Minyak Terapi</span></td><td>Rp 60.000</td><td>Untuk pijat & perawatan tubuh</td></tr>
+              <tr><td>6</td><td>Minyak Kayu Putih</td><td><span class="badge-status selesai">Minyak Angin</span></td><td>Rp 30.000</td><td>Meredakan masuk angin & perut kembung</td></tr>
+              <tr><td>7</td><td>Minyak Angin Aroma</td><td><span class="badge-status selesai">Minyak Angin</span></td><td>Rp 20.000</td><td>Meredakan pusing & mual</td></tr>
+              <tr><td>8</td><td>Minyak Angin</td><td><span class="badge-status selesai">Minyak Angin</span></td><td>Rp 18.000</td><td>Mengatasi gejala masuk angin</td></tr>
+              <tr><td>9</td><td>Kapsul Herbal</td><td><span class="badge-status" style="background:rgba(83,52,131,0.2);color:#b39ddb;">Kapsul</span></td><td>Rp 60.000</td><td>Suplemen herbal harian</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:14px 22px;border-top:1px solid var(--admin-border);font-size:12px;color:var(--admin-muted);">
+          Total: 9 produk aktif
+        </div>
+      </div>
+    </div>
+    <div class="admin-footer">&copy; 2025 Herbal Pak Luluk &mdash; Admin Panel</div>
+  </div>
+</div>
+</body>
+</html>

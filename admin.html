@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Admin - Herbal Pak Luluk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
+</head>
+<body class="admin-page">
+
+<div class="admin-wrapper">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="brand">
+      <div class="brand-icon"><i class="fa fa-leaf"></i></div>
+      <div>
+        <h4>Herbal Pak Luluk</h4>
+        <small>Admin Panel</small>
+      </div>
+    </div>
+    <nav class="admin-nav">
+      <div class="nav-section-title">Menu Utama</div>
+      <a href="admin.html" class="active"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+      <a href="data.html"><i class="fa fa-table"></i><span>Data Pesanan</span></a>
+      <a href="produk-admin.html"><i class="fa fa-cube"></i><span>Kelola Produk</span></a>
+
+      <div class="nav-section-title">Halaman Publik</div>
+      <a href="index.html"><i class="fa fa-home"></i><span>Beranda</span></a>
+      <a href="produk.html"><i class="fa fa-shopping-bag"></i><span>Produk</span></a>
+      <a href="pesan.html"><i class="fa fa-pencil"></i><span>Form Pesan</span></a>
+      <a href="tentang.html"><i class="fa fa-info-circle"></i><span>Tentang</span></a>
+      <a href="galeri.html"><i class="fa fa-picture-o"></i><span>Galeri</span></a>
+    </nav>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+
+    <!-- TOPBAR -->
+    <div class="admin-topbar">
+      <div class="page-title">
+        <h5>Dashboard</h5>
+        <small>Selamat datang di panel administrasi Herbal Pak Luluk</small>
+      </div>
+      <div class="topbar-actions">
+        <a href="pesan.html"><i class="fa fa-plus"></i> Tambah Pesanan</a>
+        <a href="index.html"><i class="fa fa-external-link"></i> Lihat Website</a>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="admin-content">
+
+      <!-- STAT CARDS -->
+      <div class="row">
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card">
+            <div class="stat-icon red"><i class="fa fa-shopping-cart"></i></div>
+            <div class="stat-info">
+              <h3 id="statTotal">0</h3>
+              <p>Total Pesanan</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa fa-cube"></i></div>
+            <div class="stat-info">
+              <h3>9</h3>
+              <p>Total Produk</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card">
+            <div class="stat-icon blue"><i class="fa fa-users"></i></div>
+            <div class="stat-info">
+              <h3 id="statPelanggan">0</h3>
+              <p>Pelanggan</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-card">
+            <div class="stat-icon yellow"><i class="fa fa-bar-chart"></i></div>
+            <div class="stat-info">
+              <h3 id="statJumlah">0</h3>
+              <p>Item Terjual</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- RECENT ORDERS -->
+        <div class="col-md-8">
+          <div class="admin-panel">
+            <div class="panel-header">
+              <h5><i class="fa fa-clock-o" style="color:var(--admin-accent);margin-right:8px"></i>Pesanan Terbaru</h5>
+              <a href="data.html" style="font-size:12px;color:var(--admin-muted);text-decoration:none;">Lihat Semua →</a>
+            </div>
+            <div class="panel-body" style="padding:0;">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Nama</th>
+                    <th>Produk</th>
+                    <th>Jumlah</th>
+                    <th>Kota</th>
+                  </tr>
+                </thead>
+                <tbody id="recentOrders">
+                  <tr><td colspan="4" style="text-align:center;color:var(--admin-muted);padding:30px;">Belum ada pesanan masuk</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUK POPULER -->
+        <div class="col-md-4">
+          <div class="admin-panel">
+            <div class="panel-header">
+              <h5><i class="fa fa-star" style="color:var(--admin-warning);margin-right:8px"></i>Produk Unggulan</h5>
+            </div>
+            <div class="panel-body">
+              <div id="produkPopuler">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                  <div style="width:38px;height:38px;border-radius:8px;background:rgba(233,69,96,0.15);display:flex;align-items:center;justify-content:center;font-size:16px;">🌿</div>
+                  <div><div style="font-size:13px;font-weight:600">Balsem Terapi Panas 40gr</div><div style="font-size:11px;color:var(--admin-muted)">Rp 35.000</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                  <div style="width:38px;height:38px;border-radius:8px;background:rgba(0,184,148,0.15);display:flex;align-items:center;justify-content:center;font-size:16px;">💊</div>
+                  <div><div style="font-size:13px;font-weight:600">Kapsul Herbal</div><div style="font-size:11px;color:var(--admin-muted)">Rp 60.000</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                  <div style="width:38px;height:38px;border-radius:8px;background:rgba(9,132,227,0.15);display:flex;align-items:center;justify-content:center;font-size:16px;">🫙</div>
+                  <div><div style="font-size:13px;font-weight:600">Minyak Terapi</div><div style="font-size:11px;color:var(--admin-muted)">Rp 60.000</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:38px;height:38px;border-radius:8px;background:rgba(253,203,110,0.15);display:flex;align-items:center;justify-content:center;font-size:16px;">💨</div>
+                  <div><div style="font-size:13px;font-weight:600">Minyak Angin Aroma</div><div style="font-size:11px;color:var(--admin-muted)">Rp 20.000</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QUICK LINKS -->
+          <div class="admin-panel">
+            <div class="panel-header">
+              <h5><i class="fa fa-link" style="color:var(--admin-info);margin-right:8px"></i>Aksi Cepat</h5>
+            </div>
+            <div class="panel-body" style="display:flex;flex-direction:column;gap:10px;">
+              <a href="pesan.html" class="btn-admin-primary" style="justify-content:center;"><i class="fa fa-plus"></i> Tambah Pesanan Baru</a>
+              <a href="data.html" class="btn-admin-primary" style="justify-content:center;background:var(--admin-info);"><i class="fa fa-table"></i> Kelola Data Pesanan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+
+    <div class="admin-footer">
+      &copy; 2025 Herbal Pak Luluk &mdash; Admin Panel
+    </div>
+
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrapper -->
+
+<script>
+  window.onload = function() {
+    const data = JSON.parse(localStorage.getItem('pesanan')) || [];
+    const dummy = [
+      { nama:'Budi Santoso', produk:'Balsem Panas 40gr', jumlah:2, alamat:'Surabaya' },
+      { nama:'Siti Aminah', produk:'Balsem Hangat 20gr', jumlah:1, alamat:'Sidoarjo' },
+      { nama:'Ahmad Fauzi', produk:'Kapsul Herbal', jumlah:3, alamat:'Gresik' },
+      { nama:'Dewi Lestari', produk:'Minyak Terapi', jumlah:1, alamat:'Mojokerto' }
+    ];
+    const all = [...dummy, ...data];
+
+    document.getElementById('statTotal').textContent = all.length;
+    document.getElementById('statPelanggan').textContent = all.length;
+    document.getElementById('statJumlah').textContent = all.reduce((s,i) => s + parseInt(i.jumlah||0), 0);
+
+    const tbody = document.getElementById('recentOrders');
+    const recent = all.slice(-5).reverse();
+    if (recent.length === 0) return;
+    tbody.innerHTML = recent.map(r => `
+      <tr>
+        <td>${r.nama}</td>
+        <td>${r.produk}</td>
+        <td>${r.jumlah}</td>
+        <td>${r.alamat}</td>
+      </tr>
+    `).join('');
+  };
+</script>
+</body>
+</html>
